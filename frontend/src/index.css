@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+/* Premium Custom Design System tokens & utilities */
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    background-color: #020617; /* Slate 950 */
+    overflow-y: overlay;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+/* Glassmorphism custom components */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-glow {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(224, 90, 71, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(224, 90, 71, 0.03);
+}
+
+/* Glowing voice metrics card */
+.glow-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: 0.75s;
+}
+
+.glow-card:hover::after {
+  left: 125%;
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Cassandra cassette audio waveform animation */
+@keyframes wave-bounce {
+  0%, 100% {
+    transform: scaleY(0.2);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.bar-anim-1 { animation: wave-bounce 1.2s ease-in-out infinite alternate; }
+.bar-anim-2 { animation: wave-bounce 0.8s ease-in-out infinite alternate 0.2s; }
+.bar-anim-3 { animation: wave-bounce 1.5s ease-in-out infinite alternate 0.1s; }
+.bar-anim-4 { animation: wave-bounce 1.0s ease-in-out infinite alternate 0.3s; }
+.bar-anim-5 { animation: wave-bounce 1.3s ease-in-out infinite alternate 0.4s; }

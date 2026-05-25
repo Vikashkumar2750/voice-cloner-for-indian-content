@@ -1,0 +1,10 @@
+{
+  "name": "Remix: Voice Cloner for Indian Content",
+  "description": "An interactive full-stack app for cloning voice or using regional Indian accents, enabling automated video voiceovers from scripts.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

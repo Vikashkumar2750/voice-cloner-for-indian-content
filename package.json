@@ -1,0 +1,15 @@
+{
+  "name": "vanisynth-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "install-all": "npm install --workspace=frontend --workspace=backend",
+    "dev": "npm run dev --workspace=backend",
+    "build": "npm run build --workspace=frontend && npm run build --workspace=backend"
+  }
+}
