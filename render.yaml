@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: vanisynth-voicebox-api
+    env: docker
+    dockerContext: ./backend-voicebox
+    dockerfilePath: ./backend-voicebox/Dockerfile
+    plan: free # Will likely fail due to 512MB RAM limit on free tier
+    envVars:
+      - key: PORT
+        value: 10000

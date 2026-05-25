@@ -75,10 +75,13 @@ export default function App() {
   const [cloneHistory, setCloneHistory] = useState<CloneHistoryItem[]>([]);
   const outputAudioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Auto-detect local Voicebox running on default port 17493
+  // Use the deployed Render backend instead of local Voicebox
+  const VOICEBOX_API_URL = "https://vanisynth-voicebox-api.onrender.com";
+
+  // Auto-detect remote Voicebox status
   const checkVoiceboxStatus = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:17493/profiles", {
+      const res = await fetch(`${VOICEBOX_API_URL}/profiles`, {
         method: "GET",
         headers: { "Content-Type": "application/json" }
       });
@@ -171,7 +174,7 @@ export default function App() {
     setSynthesisProgressText("Creating new local Voicebox profile...");
     
     // 1. Create a profile
-    const profileRes = await fetch("http://127.0.0.1:17493/profiles", {
+    const profileRes = await fetch(`${VOICEBOX_API_URL}/profiles`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -206,7 +209,7 @@ export default function App() {
     formData.append("file", audioBlob, `recording.${refAudioMime?.split("/")[1] || "webm"}`);
     formData.append("reference_text", "This is my speech sample cloned for zero-shot synthesis.");
 
-    const sampleRes = await fetch(`http://127.0.0.1:17493/profiles/${profileId}/samples`, {
+    const sampleRes = await fetch(`${VOICEBOX_API_URL}/profiles/${profileId}/samples`, {
       method: "POST",
       body: formData
     });
@@ -292,7 +295,7 @@ export default function App() {
         setSynthesisProgressText("Synthesizing speech via Voicebox Model...");
 
         // Stream generated audio synchronously
-        const streamRes = await fetch("http://127.0.0.1:17493/generate/stream", {
+        const streamRes = await fetch(`${VOICEBOX_API_URL}/generate/stream`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
