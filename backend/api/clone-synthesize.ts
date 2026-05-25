@@ -84,6 +84,12 @@ export default async function handler(req: any, res: any) {
       return res.status(400).json({ error: "Please enter a script to synthesize." });
     }
 
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(503).json({ 
+        error: "Gemini API key is not configured for cloud synthesis fallback. Please ensure your local Voicebox desktop app is running to perform zero-shot voice cloning!" 
+      });
+    }
+
     const ai = getGeminiClient();
 
     let contents: any[] = [];

@@ -43,6 +43,14 @@ export default async function handler(req: any, res: any) {
       return res.status(400).json({ error: "No video script supplied." });
     }
 
+    if (!process.env.GEMINI_API_KEY) {
+      // Graceful fallback if no Gemini key: just return the raw script
+      return res.json({ 
+        success: true, 
+        localizedScript: `[Original Script (Gemini Localization disabled)]\n\n${script}` 
+      });
+    }
+
     const ai = getGeminiClient();
 
     const prompt = `You are a professional video scriptwriter specializing in localized Indian content.
